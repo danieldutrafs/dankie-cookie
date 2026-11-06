@@ -7,7 +7,7 @@ const alvos = [
   ".sabores h2", ".sabores .dica", ".card",
   ".avaliacoes h2", ".avaliacoes .dica", ".avaliacao",
   ".torta h2", ".fotos-torta", ".info-torta h3", ".info-torta > p",
-  ".precos-torta", ".info-torta .btn-whats"
+  ".precos-torta"
 ].join(", ");
 
 const itens = document.querySelectorAll(alvos);
@@ -54,55 +54,124 @@ if (reduz || !("IntersectionObserver" in window)) {
 }
 
 /* ---------- 2) Dica de "deslize": o carrossel dá uma espiadinha ---------- */
-const carrossel = document.querySelector(".sabores .carrossel");
-if (carrossel && !reduz && "IntersectionObserver" in window) {
+const carrosselSabores = document.querySelector(".sabores .carrossel");
+if (carrosselSabores && !reduz && "IntersectionObserver" in window) {
   new IntersectionObserver((lista, obs) => {
     if (!lista[0].isIntersecting) return;
     obs.disconnect();
     setTimeout(() => {
-      carrossel.style.scrollSnapType = "none";          // libera o encaixe por um instante
-      carrossel.scrollTo({ left: 80, behavior: "smooth" });
+      carrosselSabores.style.scrollSnapType = "none";    // libera o encaixe por um instante
+      carrosselSabores.scrollTo({ left: 80, behavior: "smooth" });
       setTimeout(() => {
-        carrossel.scrollTo({ left: 0, behavior: "smooth" });
-        setTimeout(() => (carrossel.style.scrollSnapType = ""), 500);
+        carrosselSabores.scrollTo({ left: 0, behavior: "smooth" });
+        setTimeout(() => (carrosselSabores.style.scrollSnapType = ""), 500);
       }, 700);
     }, 900);
-  }, { threshold: 0.6 }).observe(carrossel);
+  }, { threshold: 0.6 }).observe(carrosselSabores);
 }
 
-/* ---------- 3) Botão flutuante do WhatsApp: aparece depois de rolar ---------- */
-const zap = document.querySelector(".zap-fixo");
-if (zap) {
-  const atualizar = () => zap.classList.toggle("visivel", window.scrollY > 350);
-  window.addEventListener("scroll", atualizar, { passive: true });
-  atualizar();
-}
+/* ---------- 3) Botão do WhatsApp que viaja: topo > canto da tela > torta ----------
+   É UM botão só. Ele troca de lugar no HTML e "voa" entre as posições (técnica FLIP):
+   1) guarda onde ele estava  2) muda de lugar  3) anima da posição antiga até a nova. */
+const zap = document.getElementById("zap");
+const slotTorta = document.querySelector(".slot-torta");
 
-/* ---------- 4) Carrossel: desfoca os cards que estão saindo da tela ---------- */
-function efeitoCarrossel(c) {
-  const itens = [...c.children];
-  let esperando = false;
+if (zap && slotTorta) {
+  const slotHero = zap.parentElement;
+  const hrefCookies = zap.getAttribute("href");
+  const hrefTorta = hrefCookies.split("?")[0] + "?text=" +
+                    encodeURIComponent("Oi! Quero pedir torta de cookie");
 
-  function atualizar() {
-    const area = c.getBoundingClientRect();
-    itens.forEach((el) => {
-      const r = el.getBoundingClientRect();
-      // quanto do card está fora da área visível (0 = dentro, 1 = totalmente fora)
-      const fora = Math.max(0, area.left - r.left) + Math.max(0, r.right - area.right);
-      const f = Math.min(fora / r.width, 1);
-      // só começa a desfocar depois que mais da metade saiu
-      const t = Math.max(0, (f - 0.55) / 0.45);
-      el.style.setProperty("--b", (t * 5).toFixed(2) + "px");   // desfoque máximo: 5px
-      el.style.setProperty("--o", (1 - t * 0.6).toFixed(2));    // opacidade mínima: 40%
-    });
-    esperando = false;
+  // texto e link de cada "estado" do botão (o número vem do HTML)
+  const estados = {
+    hero:  { texto: zap.textContent.trim(), href: hrefCookies },
+    canto: { texto: "Pedir no WhatsApp",    href: hrefCookies },
+    torta: { texto: "Quero torta",          href: hrefTorta }
+  };
+  let atual = "hero";
+
+  function ir(novo) {
+    if (novo === atual) return;
+
+    const antes = zap.getBoundingClientRect();           // 1) onde está agora
+
+    if (novo === "canto") document.body.appendChild(zap);   // 2) muda de lugar
+    else (novo === "hero" ? slotHero : slotTorta).appendChild(zap);
+    zap.classList.toggle("no-canto", novo === "canto");
+    zap.textContent = estados[novo].texto;
+    zap.href = estados[novo].href;
+
+    const depois = zap.getBoundingClientRect();
+    atual = novo;
+    if (reduz) return;
+
+    zap.animate([                                         // 3) voa da posição antiga
+      { transform: `translate(${antes.left - depois.left}px, ${antes.top - depois.top}px)`,
+        width: antes.width + "px", height: antes.height + "px" },
+      { transform: "translate(0, 0)",
+        width: depois.width + "px", height: depois.height + "px" }
+    ], { duration: 650, easing: "cubic-bezier(.22, 1, .36, 1)" });
   }
 
+  // decide em qual estado o botão deve estar (com folga pra não ficar piscando)
+  function avaliar() {
+    const h = slotHero.getBoundingClientRect();
+    const t = slotTorta.getBoundingClientRect();
+    const vh = window.innerHeight;
+    let alvo;
+    if (t.top < vh - (atual === "torta" ? 30 : 90)) alvo = "torta";
+    else if (h.top < (atual === "hero" ? 56 : 150)) alvo = "canto";
+    else alvo = "hero";
+    ir(alvo);
+  }
+
+  let esperando = false;
+  const agendar = () => {
+    if (esperando) return;
+    esperando = true;
+    requestAnimationFrame(() => { esperando = false; avaliar(); });
+  };
+  window.addEventListener("scroll", agendar, { passive: true });
+  window.addEventListener("resize", agendar);
+  avaliar();
+}
+
+/* ---------- 4) Carrossel: desfoca os cards que estão saindo da tela ----------
+   Mede os cards uma vez só (e de novo se a tela mudar de tamanho) e depois usa
+   só contas simples a cada rolagem: isso deixa o deslize leve e fluido. */
+function efeitoCarrossel(c) {
+  let largura = 0;
+  let cards = [];
+
+  function medir() {
+    largura = c.clientWidth;
+    cards = [...c.children].map((el) => ({
+      el, x: el.offsetLeft, w: el.offsetWidth, b: -1, o: -1
+    }));
+    atualizar();
+  }
+
+  function atualizar() {
+    const rolagem = c.scrollLeft;
+    cards.forEach((card) => {
+      const x = card.x - rolagem;                        // posição do card na área visível
+      const fora = Math.max(0, -x) + Math.max(0, x + card.w - largura);
+      const f = Math.min(fora / card.w, 1);              // 0 = dentro, 1 = totalmente fora
+      const t = Math.max(0, (f - 0.55) / 0.45);          // só começa depois que >55% saiu
+      const b = Math.round(t * 5 * 2) / 2;               // desfoque máximo: 5px (passos de 0,5)
+      const o = Math.round((1 - t * 0.6) * 20) / 20;     // opacidade mínima: 40%
+      if (b !== card.b) { card.el.style.setProperty("--b", b + "px"); card.b = b; }
+      if (o !== card.o) { card.el.style.setProperty("--o", o); card.o = o; }
+    });
+  }
+
+  let esperando = false;
   c.addEventListener("scroll", () => {
-    if (!esperando) { esperando = true; requestAnimationFrame(atualizar); }
+    if (esperando) return;
+    esperando = true;
+    requestAnimationFrame(() => { esperando = false; atualizar(); });
   }, { passive: true });
-  window.addEventListener("resize", atualizar);
-  atualizar();
-  setTimeout(atualizar, 900);   // recalcula depois das animações de entrada
+  window.addEventListener("resize", medir);
+  medir();
 }
 if (!reduz) document.querySelectorAll(".carrossel").forEach(efeitoCarrossel);

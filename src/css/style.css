@@ -103,7 +103,6 @@ h2 {
   border-radius: 24px 24px 0 0;
   background: linear-gradient(var(--pessego), var(--creme));
   padding: 28px 20px 44px;
-  min-height: 300px;
 }
 .hero h1 {
   position: relative;
@@ -123,21 +122,21 @@ h2 {
 .hero p {
   position: relative;
   z-index: 2;
-  max-width: 55%;
+  max-width: 92%;
   margin: 14px 0 20px;
   font-size: .95rem;
   line-height: 1.45;
   color: var(--marrom-claro);
 }
 .img-cookie-topo {
-  position: absolute;
-  right: 9%;
-  bottom: 18px;
+  position: relative;          /* agora ocupa espaço: nunca sobrepõe o texto */
   z-index: 1;
-  width: 54%;
+  display: block;
+  width: min(82%, 330px);
   height: auto;
+  margin: 22px auto -38px;     /* centralizado; o negativo faz ele encostar na nuvem */
   transform: rotate(-4deg);
-  filter: drop-shadow(0 10px 10px rgba(59, 31, 18, .3));
+  filter: drop-shadow(0 12px 12px rgba(59, 31, 18, .3));
 }
 
 /* --- nuvem com contorno marrom --- */
@@ -174,6 +173,7 @@ main {
 
 /* a faixa que desliza */
 .carrossel {
+  position: relative;
   display: flex;
   gap: 14px;
   overflow-x: auto;
@@ -505,97 +505,103 @@ main {
   color: var(--marrom-claro);
 }
 
-/* ===== BOTÃO FLUTUANTE DO WHATSAPP ===== */
-.zap-fixo {
+/* =========================================================
+   BOTÃO DO WHATSAPP QUE VIAJA (topo > canto > torta)
+   ========================================================= */
+.slot {                        /* "vaga" que guarda o espaço do botão */
+  display: flex;
+  align-items: flex-start;
+  min-height: 54px;
+}
+.zap {
+  white-space: nowrap;         /* o texto não quebra enquanto o botão muda de tamanho */
+  text-align: center;
+  animation: pulsar 2.6s ease-in-out infinite;
+}
+.zap.no-canto {                /* estado "no canto da tela" */
   position: fixed;
   right: 16px;
   bottom: 16px;
   z-index: 50;
-  padding: 12px 18px;
-  border-radius: 999px;
-  background: var(--verde);
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
-  opacity: 0;
-  translate: 0 80px;           /* começa escondido embaixo */
-  pointer-events: none;
-  transition: opacity .4s, translate .5s cubic-bezier(.2, 1.4, .4, 1);
+  padding: 12px 20px;
+  font-size: .95rem;
+  box-shadow: 0 6px 0 var(--verde-escuro), 0 10px 20px rgba(0, 0, 0, .25);
 }
-.zap-fixo.visivel {            /* o JS adiciona esta classe depois de rolar um pouco */
-  opacity: 1;
-  translate: 0 0;
-  pointer-events: auto;
-  animation: pulsar 2.6s 1s infinite;
-}
+.slot-torta .zap { width: 100%; animation-name: pulsar-leve; }   /* botão largo: pulso mais discreto */
+@keyframes pulsar-leve { 50% { scale: 1.02; } }
 
 /* =========================================================
    ANIMAÇÕES
-   Usamos as propriedades "translate", "rotate" e "scale" (separadas do
-   "transform") para as animações não brigarem com as rotações já existentes.
+   Só movem "translate", "rotate", "scale", "opacity" e "filter":
+   propriedades que o celular anima sem travar.
    ========================================================= */
+:root {
+  --suave: cubic-bezier(.22, 1, .36, 1);     /* começa rápido e freia macio */
+  --mola:  cubic-bezier(.34, 1.56, .64, 1);  /* passa um pouquinho e volta (efeito mola) */
+}
 
 @keyframes subir {
-  from { opacity: 0; translate: 0 24px; }
+  from { opacity: 0; translate: 0 22px; }
   to   { opacity: 1; translate: 0 0; }
 }
-@keyframes cair-cookie {       /* o cookie do topo cai e quica */
-  0%   { opacity: 0; translate: 0 -90px; rotate: -25deg; }
-  70%  { opacity: 1; translate: 0 8px;   rotate: 4deg; }
-  100% { opacity: 1; translate: 0 0;     rotate: 0deg; }
+@keyframes cair-cookie {
+  from { opacity: 0; translate: 0 -70px; rotate: -18deg; }
+  to   { opacity: 1; translate: 0 0;     rotate: 0deg; }
 }
-@keyframes flutuar { 50% { translate: 0 -10px; } }
-@keyframes bob     { 50% { translate: 0 -9px; rotate: 10deg; } }
-@keyframes pulsar {
-  0%   { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 0 rgba(31, 174, 79, .55); }
-  70%  { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 16px rgba(31, 174, 79, 0); }
-  100% { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 0 rgba(31, 174, 79, 0); }
-}
+@keyframes flutuar { 50% { translate: 0 -9px; rotate: 1.5deg; } }
+@keyframes bob     { 50% { translate: 0 -8px; rotate: 8deg; } }
+@keyframes pulsar  { 50% { scale: 1.05; } }
 @keyframes brilhar {
-  0%   { scale: .5; opacity: 0; }
-  60%  { scale: 1.15; opacity: 1; }
-  100% { scale: 1; opacity: 1; }
+  0%   { scale: .6;   opacity: 0; }
+  60%  { scale: 1.12; opacity: 1; }
+  100% { scale: 1;    opacity: 1; }
 }
 
-/* --- entrada do topo (acontece ao abrir a página) --- */
-.hero h1            { animation: subir .8s .1s both; }
-.hero p             { animation: subir .8s .3s both; }
-.hero .btn-whats    { animation: subir .8s .5s both, pulsar 2.4s 1.6s infinite; }
-.img-cookie-topo    { animation: cair-cookie 1s .3s cubic-bezier(.3, .8, .4, 1) both,
-                                 flutuar 5s 1.6s ease-in-out infinite; }
-.logo               { animation: subir .6s both; }
+/* --- entrada do topo --- */
+.logo            { animation: subir .6s var(--suave) both; }
+.hero h1         { animation: subir .9s .08s var(--suave) both; }
+.hero p          { animation: subir .9s .20s var(--suave) both; }
+.slot-hero       { animation: subir .9s .32s var(--suave) both; }
+.img-cookie-topo { animation: cair-cookie 1.1s .35s var(--mola) both,
+                              flutuar 6s 1.6s ease-in-out infinite; }
 
 /* --- gotas de chocolate flutuando, cada uma no seu ritmo --- */
-.gota               { animation: bob 6s ease-in-out infinite; }
-.gota:nth-of-type(2n)  { animation-duration: 7.5s; animation-delay: -2s; }
-.gota:nth-of-type(3n)  { animation-duration: 5s;   animation-delay: -1s; }
-.gota:nth-of-type(5n)  { animation-duration: 9s;   animation-delay: -4s; }
+.gota                 { animation: bob 6s ease-in-out infinite; }
+.gota:nth-of-type(2n) { animation-duration: 7.5s; animation-delay: -2s; }
+.gota:nth-of-type(3n) { animation-duration: 5s;   animation-delay: -1s; }
+.gota:nth-of-type(5n) { animation-duration: 9s;   animation-delay: -4s; }
 
-/* --- aparecem ao rolar (o JS coloca as classes .reveal e .visivel) --- */
+/* --- aparecem ao rolar (o JS coloca .reveal e depois .visivel) --- */
 .js .reveal {
   opacity: 0;
-  translate: 0 28px;
-  transition: opacity .7s ease var(--d, 0s),
-              translate .7s cubic-bezier(.2, .8, .2, 1) var(--d, 0s),
-              scale .8s cubic-bezier(.2, 1.4, .4, 1) var(--d, 0s),
-              transform .25s, box-shadow .25s;
+  translate: 0 24px;
+  will-change: opacity, translate;
+  transition: opacity .8s var(--suave) var(--d, 0s),
+              translate .8s var(--suave) var(--d, 0s),
+              scale .9s var(--mola) var(--d, 0s),
+              transform .3s var(--suave), box-shadow .3s;
 }
 .js .card.reveal,
-.js .avaliacao.reveal { translate: 50px 0; }          /* entram vindos da direita */
-.js .fotos-torta.reveal { translate: 0 0; scale: .8; } /* a torta "cresce" */
-.js .reveal.visivel { opacity: 1; translate: 0 0; scale: 1; }
-.avaliacao.visivel .estrelas { animation: brilhar .8s .3s both; }
+.js .avaliacao.reveal   { translate: 40px 0; }          /* entram vindos da direita */
+.js .fotos-torta.reveal { translate: 0 0; scale: .85; } /* a torta "cresce" */
+.js .reveal.visivel     { opacity: 1; translate: 0 0; scale: 1; will-change: auto; }
+.avaliacao.visivel .estrelas { animation: brilhar .8s .3s var(--mola) both; }
 
 /* --- cards reagem ao dedo ou ao mouse --- */
-.card, .avaliacao { transition: transform .25s, box-shadow .25s; }
 .card:hover, .card:active {
   transform: translateY(-6px) rotate(-1deg);
   box-shadow: 0 14px 22px rgba(90, 58, 34, .2);
 }
-.card img { transition: transform .4s; }
+.card img { transition: transform .5s var(--suave); }
 .card:hover img, .card:active img { transform: scale(1.08) rotate(6deg); }
 .btn-whats:active { transform: translateY(3px); }
+
+/* --- carrossel: os cards que saem da tela vão desfocando e esmaecendo ---
+   O JavaScript calcula --b (desfoque) e --o (opacidade) de cada card. */
+.carrossel > .card,
+.carrossel > .avaliacao {
+  filter: blur(var(--b, 0px)) opacity(var(--o, 1));
+}
 
 /* --- quem prefere menos movimento no celular não vê animações --- */
 @media (prefers-reduced-motion: reduce) {
@@ -605,11 +611,4 @@ main {
     scroll-behavior: auto !important;
   }
   .js .reveal { opacity: 1; translate: none; scale: none; }
-}
-
-/* --- carrossel: os cards que saem da tela vão desfocando e esmaecendo ---
-   O JavaScript calcula --b (desfoque) e --o (opacidade) de cada card. */
-.carrossel > .card,
-.carrossel > .avaliacao {
-  filter: blur(var(--b, 0px)) opacity(var(--o, 1));
 }

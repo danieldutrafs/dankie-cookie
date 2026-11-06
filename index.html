@@ -31,7 +31,10 @@
             <span class="gota" style="--x:4%;--y:72%;--s:14px;--r:12deg"></span>
             <h1>Feito com amor, <strong>recheado de verdade</strong></h1>
             <p>Do clássico ao Kinder Bueno, tem um cookie pra cada vontade.</p>
-            <a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
+            <!-- UM botão só: ele "viaja" pela página (topo > canto da tela > torta). O JS troca texto e link. -->
+            <div class="slot slot-hero">
+                <a id="zap" class="btn-whats zap" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
+            </div>
             <img class="img-cookie-topo" src="src/img/cookiet-removebg-preview.png" alt="Cookie recheado da Dankie">
         </section>
 
@@ -202,14 +205,16 @@
                         </li>
                     </ul>
 
-                    <a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a>
+                    <!-- o botão do topo pousa aqui quando você chega na torta -->
+                    <div class="slot slot-torta">
+                        <noscript><a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a></noscript>
+                    </div>
                 </div>
 
             </div>
         </section>
 
     </main>
-    <a class="zap-fixo" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Pedir no WhatsApp</a>
 
     <script src="src/js/script.js" defer></script>
 </body>
