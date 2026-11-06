@@ -7,14 +7,14 @@ const alvos = [
   ".sabores h2", ".sabores .dica", ".card",
   ".avaliacoes h2", ".avaliacoes .dica", ".avaliacao",
   ".torta h2", ".fotos-torta", ".info-torta h3", ".info-torta > p",
-  ".precos-torta"
+  ".precos-torta", ".daniel-foto", ".daniel-texto", ".faq h2", ".faq-item", ".rodape-marca", ".rodape-links", ".rodape-fim"
 ].join(", ");
 
 const itens = document.querySelectorAll(alvos);
 itens.forEach((el) => el.classList.add("reveal"));
 
 // atraso escalonado: cada irmão aparece um pouquinho depois do anterior
-document.querySelectorAll(".carrossel, .info-torta").forEach((grupo) => {
+document.querySelectorAll(".carrossel, .info-torta, .faq-lista").forEach((grupo) => {
   [...grupo.children].forEach((el, i) =>
     el.style.setProperty("--d", (i % 4) * 0.1 + "s")
   );
@@ -70,25 +70,30 @@ if (carrosselSabores && !reduz && "IntersectionObserver" in window) {
   }, { threshold: 0.6 }).observe(carrosselSabores);
 }
 
-/* ---------- 3) Botão do WhatsApp que viaja: topo > canto da tela > torta ----------
+/* ---------- 3) Botão do WhatsApp: fica no canto da tela e vira "Quero torta" na torta ----------
    É UM botão só. Ele troca de lugar no HTML e "voa" entre as posições (técnica FLIP):
    1) guarda onde ele estava  2) muda de lugar  3) anima da posição antiga até a nova. */
 const zap = document.getElementById("zap");
 const slotTorta = document.querySelector(".slot-torta");
 
 if (zap && slotTorta) {
-  const slotHero = zap.parentElement;
   const hrefCookies = zap.getAttribute("href");
   const hrefTorta = hrefCookies.split("?")[0] + "?text=" +
                     encodeURIComponent("Oi! Quero pedir torta de cookie");
 
   // texto e link de cada "estado" do botão (o número vem do HTML)
   const estados = {
-    hero:  { texto: zap.textContent.trim(), href: hrefCookies },
-    canto: { texto: "Pedir no WhatsApp",    href: hrefCookies },
+    canto: { texto: zap.textContent.trim(), href: hrefCookies },
     torta: { texto: "Quero torta",          href: hrefTorta }
   };
-  let atual = "hero";
+  let atual = "canto";
+
+  if (!reduz) {                                  // entrada: o botão sobe na primeira vez
+    zap.classList.add("intro");
+    zap.addEventListener("animationend", (e) => {
+      if (e.animationName === "entrar") zap.classList.remove("intro");
+    });
+  }
 
   function ir(novo) {
     if (novo === atual) return;
@@ -96,7 +101,7 @@ if (zap && slotTorta) {
     const antes = zap.getBoundingClientRect();           // 1) onde está agora
 
     if (novo === "canto") document.body.appendChild(zap);   // 2) muda de lugar
-    else (novo === "hero" ? slotHero : slotTorta).appendChild(zap);
+    else slotTorta.appendChild(zap);
     zap.classList.toggle("no-canto", novo === "canto");
     zap.textContent = estados[novo].texto;
     zap.href = estados[novo].href;
@@ -113,16 +118,13 @@ if (zap && slotTorta) {
     ], { duration: 650, easing: "cubic-bezier(.22, 1, .36, 1)" });
   }
 
-  // decide em qual estado o botão deve estar (com folga pra não ficar piscando)
+  // o botão pousa na torta enquanto a "vaga" dela está na tela; fora disso, volta pro canto
   function avaliar() {
-    const h = slotHero.getBoundingClientRect();
     const t = slotTorta.getBoundingClientRect();
     const vh = window.innerHeight;
-    let alvo;
-    if (t.top < vh - (atual === "torta" ? 30 : 90)) alvo = "torta";
-    else if (h.top < (atual === "hero" ? 56 : 150)) alvo = "canto";
-    else alvo = "hero";
-    ir(alvo);
+    const abaixoDoTopo = t.top > (atual === "torta" ? 60 : 120);     // ainda não passou pra cima
+    const acimaDoFim   = t.top < vh - (atual === "torta" ? 30 : 90); // já entrou pela parte de baixo
+    ir(abaixoDoTopo && acimaDoFim ? "torta" : "canto");
   }
 
   let esperando = false;

@@ -30,23 +30,10 @@
             <span class="gota branca" style="--x:46%;--y:80%;--s:12px;--r:40deg"></span>
             <span class="gota" style="--x:4%;--y:72%;--s:14px;--r:12deg"></span>
             <h1>Feito com amor, <strong>recheado de verdade</strong></h1>
-            <p>Do clássico ao Kinder Bueno, tem um cookie pra cada vontade.</p>
-            <!-- UM botão só: ele "viaja" pela página (topo > canto da tela > torta). O JS troca texto e link. -->
-            <div class="slot slot-hero">
-                <a id="zap" class="btn-whats zap" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
-            </div>
+            
             <img class="img-cookie-topo" src="src/img/cookiet-removebg-preview.png" alt="Cookie recheado da Dankie">
+            <p>Do clássico ao Kinder Bueno, tem um cookie pra cada vontade.</p>
         </section>
-
-        <!-- nuvem com contorno marrom -->
-        <svg class="nuvem" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
-            <path
-                d="M0 0 H400 V4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4 Z"
-                fill="#fff3e3" />
-            <path
-                d="M400 4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4"
-                fill="none" stroke="#5a3a22" stroke-width="2" vector-effect="non-scaling-stroke" />
-        </svg>
     </div>
 
     <main>
@@ -98,7 +85,7 @@
                 </article>
 
                 <article class="card">
-                    <img src="src/img/tradicional.png" alt="Cookie tradicional" loading="lazy">
+                    <img src="src/img/chocolate.png" alt="Cookie tradicional" loading="lazy">
                     <h3>Tradicional</h3>
                     <p>Chocolate ao leite e gotas de chocolate.</p>
                     <span class="preco">R$ 15</span>
@@ -111,6 +98,20 @@
                     <span class="preco">R$ 15</span>
                 </article>
 
+            </div>
+        </section>
+
+        <!-- ========== DANIEL (breve) ========== -->
+        <section class="daniel" id="daniel">
+            <div class="daniel-foto">
+                <!-- troque pela foto real do Daniel (vertical). Sem foto, aparece só a cor de fundo. -->
+                <img src="src/img/daniel.jpg" alt="Daniel, criador da Dankie" loading="lazy" onerror="this.remove()">
+            </div>
+            <div class="daniel-texto">
+                <span class="selo">De São Leopoldo, RS</span>
+                <h2>Oi, eu sou o Daniel</h2>
+                <!-- CONFIRME O TEXTO COM O DANIEL antes de publicar -->
+                <p>Cada cookie é feito à mão por mim. Cada pedido me aproxima do meu sonho: abrir a minha própria confeitaria. Obrigado por fazer parte disso!</p>
             </div>
         </section>
 
@@ -207,14 +208,64 @@
 
                     <!-- o botão do topo pousa aqui quando você chega na torta -->
                     <div class="slot slot-torta">
-                        <noscript><a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a></noscript>
+                        <noscript><a class="btn-whats" href="https://wa.me/5551998740606?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a></noscript>
                     </div>
                 </div>
 
             </div>
         </section>
 
+    
+        <!-- ========== DÚVIDAS FREQUENTES ========== -->
+        <section class="faq" id="duvidas">
+            <h2>Dúvidas frequentes</h2>
+            <!-- CONFIRME AS RESPOSTAS COM O DANIEL e troque pelas informações reais -->
+            <div class="faq-lista">
+                <details class="faq-item">
+                    <summary>Como faço meu pedido?</summary>
+                    <p>É só escolher o sabor, tocar no botão do WhatsApp e combinar os detalhes direto com o Daniel.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Quais as formas de pagamento?</summary>
+                    <p>O pagamento é combinado direto com o Daniel, pelo WhatsApp, na hora do pedido.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Onde e quando vocês entregam?</summary>
+                    <p>Entregamos na capital e região. Dia, horário e endereço são combinados pelo WhatsApp.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Como encomendo a torta?</summary>
+                    <p>A torta inteira é feita sob encomenda. Chame no WhatsApp pra combinar o prazo e o dia da entrega.</p>
+                </details>
+            </div>
+        </section>
+
+    
+        <!-- ========== RODAPÉ ========== -->
+        <footer class="rodape">
+            <span class="gota branca" style="--x:8%;--y:14%;--s:14px;--r:20deg"></span>
+            <span class="gota" style="--x:90%;--y:22%;--s:12px;--r:-30deg"></span>
+            <span class="gota branca" style="--x:84%;--y:70%;--s:16px;--r:35deg"></span>
+
+            <div class="rodape-marca">
+                <span class="logo-rodape">Dankie Cookie</span>
+                <!-- CONFIRME COM O DANIEL: cidade e regiões de entrega -->
+                <p>Cookies artesanais, feitos à mão em São Leopoldo e entregues na capital.</p>
+            </div>
+
+            <ul class="rodape-links">
+                <li><a href="https://wa.me/5551998740606" target="_blank" rel="noopener">WhatsApp</a></li>
+                <!-- troque "seuperfil" pelo Instagram do Daniel -->
+                <li><a href="https://www.instagram.com/dankie.cookie?xtok=ejNnZ3VpN2t5MHRl" target="_blank" rel="noopener">Instagram</a></li>
+            </ul>
+
+            <p class="rodape-fim">Feito com amor, assado com carinho.</p>
+            <p class="creditos">© 2026 Dankie Cookie · Site por Daniel Dutra</p>
+        </footer>
+
     </main>
+
+    <a id="zap" class="btn-whats zap no-canto" href="https://wa.me/5551998740606?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
 
     <script src="src/js/script.js" defer></script>
 </body>

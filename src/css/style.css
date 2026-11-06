@@ -9,7 +9,7 @@
   --azul-claro: #4a86ee;
   --card-fundo: #fffaf0;    /* fundo dos cards de sabor: creme bem claro */
   --pessego: #ffd9b0;
-  --creme: #fff3e3;         /* igual ao fill da nuvem no HTML */
+  --creme: #fff3e3;         /* cor do fim do degradê do topo */
   --marrom: #3b1f12;
   --marrom-claro: #5a3a22;
   --verde: #1fae4f;
@@ -63,7 +63,7 @@ h2 {
 .topo {
   max-width: 480px;
   margin: 0 auto;
-  background: var(--areia);    /* aparece embaixo das bolinhas da nuvem */
+  background: var(--areia);    /* cor de fundo da página */
   overflow: hidden;
   border-radius: 16px 16px 0 0;
 }
@@ -102,12 +102,14 @@ h2 {
   margin-top: -16px;
   border-radius: 24px 24px 0 0;
   background: linear-gradient(var(--pessego), var(--creme));
-  padding: 28px 20px 44px;
+  padding: 28px 20px 56px;      /* espaço embaixo para a descrição não ficar sob a curva */
 }
 .hero h1 {
   position: relative;
   z-index: 2;
-  max-width: 90%;
+  max-width: 94%;
+  margin: 0 auto;
+  text-align: center;
   font-family: 'Baloo 2', sans-serif;
   font-weight: 800;
   font-size: clamp(1.9rem, 8.5vw, 2.7rem);
@@ -122,29 +124,35 @@ h2 {
 .hero p {
   position: relative;
   z-index: 2;
-  max-width: 92%;
-  margin: 14px 0 20px;
-  font-size: .95rem;
+  max-width: 30ch;
+  margin: 16px auto 0;         /* espaço entre o cookie e a descrição */
+  text-align: center;
+  font-size: .98rem;
   line-height: 1.45;
   color: var(--marrom-claro);
 }
+
+/* curva suave que "abre" a seção de sabores (usa a cor de fundo da página) */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: -1px;
+  height: 34px;
+  z-index: 0;                  /* fica atrás do cookie e do texto */
+  background: var(--areia);
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+}
 .img-cookie-topo {
-  position: relative;          /* agora ocupa espaço: nunca sobrepõe o texto */
+  position: relative;
   z-index: 1;
   display: block;
-  width: min(82%, 330px);
+  width: min(82%, 380px);      /* tamanho do cookie: aumente ou diminua o 82% */
   height: auto;
-  margin: 22px auto -38px;     /* centralizado; o negativo faz ele encostar na nuvem */
+  margin: 34px auto 18px;      /* centralizado; 34px = espaço entre o título e o cookie */
   transform: rotate(-4deg);
-  filter: drop-shadow(0 12px 12px rgba(59, 31, 18, .3));
-}
-
-/* --- nuvem com contorno marrom --- */
-.nuvem {
-  display: block;
-  width: 100%;
-  height: 40px;               /* se usar viewBox "0 0 400 44" no HTML, troque para 44px */
-  margin-top: -1px;
+  filter: drop-shadow(0 14px 14px rgba(59, 31, 18, .3));
 }
 
 /* ===== SABORES (carrossel que desliza para o lado) ===== */
@@ -158,7 +166,7 @@ main {
   position: relative;
   isolation: isolate;
   background: var(--areia);
-  padding: 30px 0 34px;
+  padding: 30px 0 60px;        /* o espaço extra fica coberto pela seção do Daniel */
 }
 .sabores h2 {
   margin: 0 18px 8px;
@@ -227,96 +235,13 @@ main {
   font-size: .9rem;
 }
 
-/* ===== DANIEL (apresentação) ===== */
-.daniel {
-  position: relative;
-  isolation: isolate;
-  background: var(--areia);
-  padding: 20px 18px 64px;     /* o espaço extra fica coberto pela seção da torta */
-  text-align: center;
-}
-
-/* foto em formato de arco, com uma "sombra" azul inclinada atrás */
-.daniel-foto {
-  position: relative;
-  width: min(72%, 260px);
-  aspect-ratio: 4 / 5;
-  margin: 0 auto 26px;
-  border-radius: 999px 999px 28px 28px;
-}
-.daniel-foto::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translate(10px, 10px) rotate(3deg);
-  border-radius: inherit;
-  background: var(--azul);
-  z-index: -1;
-}
-.daniel-foto img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;           /* preenche o arco sem esticar a foto */
-  border-radius: inherit;
-  background: var(--pessego);  /* cor que aparece se a foto demorar a carregar */
-  box-shadow: 0 12px 24px rgba(90, 58, 34, .22);
-}
-
-.selo {
-  display: inline-block;
-  margin-bottom: 10px;
-  padding: 5px 14px;
-  border-radius: 999px;
-  background: var(--azul);
-  color: #fff;
-  font-weight: 700;
-  font-size: .8rem;
-}
-.daniel h2 { margin-bottom: 12px; }
-.daniel-texto p {
-  max-width: 38ch;
-  margin: 0 auto 12px;
-  font-size: .95rem;
-  line-height: 1.55;
-  color: var(--marrom-claro);
-}
-
-/* etiquetinhas de confiança */
-.daniel-fatos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  list-style: none;
-  margin: 16px 0 8px;
-}
-.daniel-fatos li {
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--card-fundo);
-  border: 2px solid #ecd3ad;
-  font-size: .82rem;
-  font-weight: 700;
-  color: var(--marrom);
-}
-
-.assinatura {
-  display: block;
-  margin-top: 8px;
-  font-family: 'Baloo 2', sans-serif;
-  font-weight: 800;
-  font-size: 1.7rem;
-  color: var(--azul);
-  transform: rotate(-3deg);
-}
-
 /* ===== TORTA (visual suave, foto grande) ===== */
 .torta {
   position: relative;
   isolation: isolate;
-  z-index: 1;
+  z-index: 3;
   margin-top: -30px;          /* sobe e encaixa por cima dos sabores */
-  padding: 36px 18px 48px;
+  padding: 36px 18px 84px;     /* o espaço extra fica coberto pela seção do Daniel */
   background: linear-gradient(#ffdcb5, #ffeed9);   /* pêssego suave, igual ao tom do topo */
   border-radius: 32px 32px 0 0;
 }
@@ -415,9 +340,12 @@ main {
 /* ===== AVALIAÇÕES ===== */
 .avaliacoes {
   position: relative;
+  z-index: 2;
   isolation: isolate;
+  margin-top: -30px;           /* encaixa por cima do fim da seção do Daniel */
+  border-radius: 32px 32px 0 0;
   background: var(--areia);
-  padding: 20px 0 64px;        /* o espaço extra fica coberto pela seção da torta */
+  padding: 38px 0 64px;        /* o espaço extra fica coberto pela seção da torta */
   text-align: center;
 }
 .avaliacoes h2 { margin: 0 18px 8px; }
@@ -505,6 +433,161 @@ main {
   color: var(--marrom-claro);
 }
 
+/* ===== DANIEL (breve) ===== */
+.daniel {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: -28px;           /* sobe e encaixa por cima do fim dos sabores */
+  padding: 36px 20px 66px;
+  background: linear-gradient(#ffe3c6, #fff0de);   /* pêssego suave */
+  border-radius: 32px 32px 0 0;
+}
+.daniel-foto {
+  position: relative;
+  flex: 0 0 118px;
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px 22px 22px;   /* formato de arco */
+}
+.daniel-foto::before {                    /* sombra azul inclinada atrás da foto */
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(7px, 7px) rotate(4deg);
+  border-radius: inherit;
+  background: var(--azul);
+  z-index: -1;
+}
+.daniel-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  background: var(--pessego);
+  box-shadow: 0 10px 20px rgba(90, 58, 34, .22);
+}
+.daniel-texto { flex: 1 1 200px; max-width: 280px; text-align: left; }
+.selo {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--azul);
+  color: #fff;
+  font-weight: 700;
+  font-size: .75rem;
+}
+.daniel h2 { font-size: 1.45rem; margin-bottom: 8px; }
+.daniel-texto p { font-size: .92rem; line-height: 1.55; color: var(--marrom-claro); }
+
+/* ===== DÚVIDAS FREQUENTES ===== */
+.faq {
+  position: relative;
+  z-index: 4;
+  margin-top: -34px;           /* encaixa por cima do fim da torta */
+  border-radius: 32px 32px 0 0;
+  padding: 38px 18px 84px;    
+  background: var(--areia);
+}
+.faq h2 { margin-bottom: 18px; text-align: center; }
+.faq-lista { display: grid; gap: 10px; }
+.faq-item {
+  overflow: hidden;
+  background: var(--card-fundo);
+  border: 2px solid #ecd3ad;
+  border-radius: 18px;
+}
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  list-style: none;
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--marrom);
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {     /* o "+" que vira "x" quando abre */
+  content: "+";
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: rotate .3s var(--suave);
+}
+.faq-item[open] summary::after { rotate: 45deg; }
+.faq-item p { padding: 0 18px 16px; font-size: .92rem; line-height: 1.55; color: var(--marrom-claro); }
+.faq-item[open] p { animation: subir .4s var(--suave); }
+
+/* ===== RODAPÉ ===== */
+.rodape {
+  position: relative;
+  z-index: 5;
+  isolation: isolate;
+  margin-top: -34px;           /* encaixa por cima do fim das dúvidas */
+  padding: 54px 24px 100px;    /* espaço embaixo: o botão do canto não cobre o texto */
+  border-radius: 32px 32px 0 0;
+  background: linear-gradient(#1553c7, #0d3a9c);   /* azul da marca: fecha como a barra do topo */
+  color: var(--creme);
+  text-align: center;
+}
+.logo-rodape {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: #fff;
+}
+.rodape-marca p {
+  max-width: 32ch;
+  margin: 6px auto 0;
+  font-size: .92rem;
+  line-height: 1.5;
+  opacity: .9;
+}
+.rodape-links {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px 0 22px;
+  list-style: none;
+}
+.rodape-links a {
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1.5px solid rgba(255, 255, 255, .4);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .25s, translate .3s var(--suave);
+}
+.rodape-links a:hover,
+.rodape-links a:active { background: rgba(255, 255, 255, .28); translate: 0 -3px; }
+.rodape-fim {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.15rem;
+  color: var(--amarelo);
+}
+.creditos { margin-top: 6px; font-size: .75rem; opacity: .65; }
+.rodape .gota:not(.branca) {   /* gota marrom mais clara para aparecer no fundo azul */
+  background: radial-gradient(circle at 30% 25%, #d39a68, #a8693f 60%, #7a4528);
+}
+
 /* =========================================================
    BOTÃO DO WHATSAPP QUE VIAJA (topo > canto > torta)
    ========================================================= */
@@ -529,6 +612,9 @@ main {
 }
 .slot-torta .zap { width: 100%; animation-name: pulsar-leve; }   /* botão largo: pulso mais discreto */
 @keyframes pulsar-leve { 50% { scale: 1.02; } }
+/* entrada do botão (só na primeira vez; o JS tira a classe .intro depois) */
+.zap.intro { animation: entrar .9s 1.2s var(--mola) both, pulsar 2.6s 2.2s ease-in-out infinite; }
+@keyframes entrar { from { opacity: 0; translate: 0 90px; } to { opacity: 1; translate: 0 0; } }
 
 /* =========================================================
    ANIMAÇÕES
@@ -548,7 +634,7 @@ main {
   from { opacity: 0; translate: 0 -70px; rotate: -18deg; }
   to   { opacity: 1; translate: 0 0;     rotate: 0deg; }
 }
-@keyframes flutuar { 50% { translate: 0 -9px; rotate: 1.5deg; } }
+@keyframes flutuar { 50% { translate: 0 -6px; rotate: 1.5deg; } }   /* sobe só 6px: não encosta no título */
 @keyframes bob     { 50% { translate: 0 -8px; rotate: 8deg; } }
 @keyframes pulsar  { 50% { scale: 1.05; } }
 @keyframes brilhar {
@@ -561,7 +647,6 @@ main {
 .logo            { animation: subir .6s var(--suave) both; }
 .hero h1         { animation: subir .9s .08s var(--suave) both; }
 .hero p          { animation: subir .9s .20s var(--suave) both; }
-.slot-hero       { animation: subir .9s .32s var(--suave) both; }
 .img-cookie-topo { animation: cair-cookie 1.1s .35s var(--mola) both,
                               flutuar 6s 1.6s ease-in-out infinite; }
 
