@@ -1,0 +1,615 @@
+/* =========================================================
+   DANKIE COOKIE - style.css (completo)
+   Ordem: base > topo > sabores > torta
+   ========================================================= */
+
+/* ===== CORES E BASE ===== */
+:root {
+  --azul: #1553c7;
+  --azul-claro: #4a86ee;
+  --card-fundo: #fffaf0;    /* fundo dos cards de sabor: creme bem claro */
+  --pessego: #ffd9b0;
+  --creme: #fff3e3;         /* igual ao fill da nuvem no HTML */
+  --marrom: #3b1f12;
+  --marrom-claro: #5a3a22;
+  --verde: #1fae4f;
+  --verde-escuro: #148a3c;
+  --amarelo: #ffc233;
+  --areia: #f6e7cd;         /* fundo geral: bege quente, mais natural que branco */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--areia);
+  color: var(--marrom);
+}
+
+img { max-width: 100%; display: block; }
+
+/* títulos de seção (reaproveitado em sabores e torta) */
+h2 {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.5rem, 6.5vw, 2rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--marrom);
+}
+
+/* botão verde do WhatsApp (funciona em <a> e em <button>) */
+.btn-whats {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  padding: 13px 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--verde);
+  color: #fff;
+  font: 700 1rem 'DM Sans', sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--verde-escuro);
+  transition: transform .15s, box-shadow .15s;
+}
+.btn-whats:hover {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 var(--verde-escuro);
+}
+
+/* ===== TOPO ===== */
+.topo {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--areia);    /* aparece embaixo das bolinhas da nuvem */
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+/* --- parte 1: barra azul com o logo --- */
+.barra {
+  position: relative;
+  overflow: hidden;
+  background: var(--azul);
+  padding: 10px 20px 26px;
+}
+.barra::before {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -40px;
+  width: 260px;
+  height: 70px;
+  background: var(--azul-claro);
+  border-radius: 50%;
+  opacity: .55;
+}
+.logo {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+}
+
+/* --- parte 2: bloco do cookie --- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  margin-top: -16px;
+  border-radius: 24px 24px 0 0;
+  background: linear-gradient(var(--pessego), var(--creme));
+  padding: 28px 20px 44px;
+  min-height: 300px;
+}
+.hero h1 {
+  position: relative;
+  z-index: 2;
+  max-width: 90%;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 8.5vw, 2.7rem);
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+.hero h1 strong {
+  display: block;
+  color: var(--marrom);
+}
+.hero p {
+  position: relative;
+  z-index: 2;
+  max-width: 55%;
+  margin: 14px 0 20px;
+  font-size: .95rem;
+  line-height: 1.45;
+  color: var(--marrom-claro);
+}
+.img-cookie-topo {
+  position: absolute;
+  right: 9%;
+  bottom: 18px;
+  z-index: 1;
+  width: 54%;
+  height: auto;
+  transform: rotate(-4deg);
+  filter: drop-shadow(0 10px 10px rgba(59, 31, 18, .3));
+}
+
+/* --- nuvem com contorno marrom --- */
+.nuvem {
+  display: block;
+  width: 100%;
+  height: 40px;               /* se usar viewBox "0 0 400 44" no HTML, troque para 44px */
+  margin-top: -1px;
+}
+
+/* ===== SABORES (carrossel que desliza para o lado) ===== */
+main {
+  max-width: 480px;           /* mesma largura do topo */
+  margin: 0 auto;
+  overflow-x: clip;           /* gotas nas bordas não criam rolagem lateral */
+}
+
+.sabores {
+  position: relative;
+  isolation: isolate;
+  background: var(--areia);
+  padding: 30px 0 34px;
+}
+.sabores h2 {
+  margin: 0 18px 8px;
+  text-align: center;
+}
+.dica {
+  margin-bottom: 16px;
+  text-align: center;
+  font-size: .82rem;
+  color: var(--marrom-claro);
+}
+
+/* a faixa que desliza */
+.carrossel {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  padding: 6px 18px 22px;
+  scroll-snap-type: x mandatory;   /* cada card "encaixa" ao soltar o dedo */
+  scroll-padding: 0 18px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--azul-claro) transparent;
+}
+
+.card {
+  flex: 0 0 62%;                   /* largura do card: o próximo aparece um pouco ao lado */
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--card-fundo);
+  border: 2px solid #ecd3ad;
+  border-radius: 22px;
+  padding: 14px 14px 16px;
+  box-shadow: 0 6px 14px rgba(90, 58, 34, .12);
+}
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 6px 6px rgba(59, 31, 18, .25));
+}
+.card h3 {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1.1;
+  color: var(--marrom);
+}
+.card p {
+  margin: 4px 0 12px;
+  font-size: .82rem;
+  line-height: 1.35;
+  color: var(--marrom-claro);
+}
+.preco {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--azul);
+  color: #fff;
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+/* ===== DANIEL (apresentação) ===== */
+.daniel {
+  position: relative;
+  isolation: isolate;
+  background: var(--areia);
+  padding: 20px 18px 64px;     /* o espaço extra fica coberto pela seção da torta */
+  text-align: center;
+}
+
+/* foto em formato de arco, com uma "sombra" azul inclinada atrás */
+.daniel-foto {
+  position: relative;
+  width: min(72%, 260px);
+  aspect-ratio: 4 / 5;
+  margin: 0 auto 26px;
+  border-radius: 999px 999px 28px 28px;
+}
+.daniel-foto::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translate(10px, 10px) rotate(3deg);
+  border-radius: inherit;
+  background: var(--azul);
+  z-index: -1;
+}
+.daniel-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;           /* preenche o arco sem esticar a foto */
+  border-radius: inherit;
+  background: var(--pessego);  /* cor que aparece se a foto demorar a carregar */
+  box-shadow: 0 12px 24px rgba(90, 58, 34, .22);
+}
+
+.selo {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  background: var(--azul);
+  color: #fff;
+  font-weight: 700;
+  font-size: .8rem;
+}
+.daniel h2 { margin-bottom: 12px; }
+.daniel-texto p {
+  max-width: 38ch;
+  margin: 0 auto 12px;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--marrom-claro);
+}
+
+/* etiquetinhas de confiança */
+.daniel-fatos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  margin: 16px 0 8px;
+}
+.daniel-fatos li {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--card-fundo);
+  border: 2px solid #ecd3ad;
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--marrom);
+}
+
+.assinatura {
+  display: block;
+  margin-top: 8px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--azul);
+  transform: rotate(-3deg);
+}
+
+/* ===== TORTA (visual suave, foto grande) ===== */
+.torta {
+  position: relative;
+  isolation: isolate;
+  z-index: 1;
+  margin-top: -30px;          /* sobe e encaixa por cima dos sabores */
+  padding: 36px 18px 48px;
+  background: linear-gradient(#ffdcb5, #ffeed9);   /* pêssego suave, igual ao tom do topo */
+  border-radius: 32px 32px 0 0;
+}
+.torta h2 {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.card-torta {
+  text-align: center;          /* sem fundo e sem borda: o conteúdo fica direto na seção */
+  color: var(--marrom);
+}
+
+/* foto grande da torta */
+.fotos-torta {
+  position: relative;
+  margin: 0 -4px 14px;
+}
+.foto-inteira {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 14px 12px rgba(59, 31, 18, .3));
+}
+
+.info-torta h3 {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  color: var(--marrom);
+}
+.info-torta p {
+  margin: 6px auto 18px;
+  max-width: 34ch;
+  font-size: .92rem;
+  line-height: 1.45;
+  color: var(--marrom-claro);
+}
+
+/* preços lado a lado, separados por uma linha fina */
+.precos-torta {
+  display: flex;
+  list-style: none;
+  margin-bottom: 20px;
+}
+.precos-torta li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: .9rem;
+  color: var(--marrom-claro);
+}
+.precos-torta li + li {
+  border-left: 1px solid rgba(59, 31, 18, .18);
+}
+.precos-torta small {
+  font-size: .72rem;
+  opacity: .8;
+}
+.precos-torta strong {
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.7rem;
+  line-height: 1.15;
+  color: var(--azul);
+}
+
+.info-torta .btn-whats {
+  display: block;
+  text-align: center;
+}
+
+/* ===== GOTAS DE CHOCOLATE (decoração, prontas para animar) =====
+   A posição, o tamanho e a rotação ficam no HTML, em style="--x; --y; --s; --r".
+   Depois, na animação, use as propriedades "translate" e "rotate" separadas,
+   que não brigam com o "transform" daqui. */
+.gota {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--s, 14px);
+  height: calc(var(--s, 14px) * .8);
+  background: radial-gradient(circle at 30% 25%, #8a5a3a, #4a2a18 60%, #2f170c);
+  border-radius: 50% 50% 42% 42% / 68% 68% 32% 32%;   /* formato de gota de chocolate */
+  transform: rotate(var(--r, 0deg));
+  box-shadow: 0 2px 3px rgba(59, 31, 18, .25);
+  z-index: -1;                /* fica atrás de textos e fotos */
+  pointer-events: none;
+}
+.gota.branca {                /* gota de chocolate branco */
+  background: radial-gradient(circle at 30% 25%, #fffaf0, #f1e2c4 70%, #dcc9a0);
+}
+
+
+/* ===== AVALIAÇÕES ===== */
+.avaliacoes {
+  position: relative;
+  isolation: isolate;
+  background: var(--areia);
+  padding: 20px 0 64px;        /* o espaço extra fica coberto pela seção da torta */
+  text-align: center;
+}
+.avaliacoes h2 { margin: 0 18px 8px; }
+
+.avaliacao {
+  position: relative;
+  overflow: hidden;
+  flex: 0 0 78%;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 20px 18px;
+  text-align: left;
+  background: var(--card-fundo);
+  border: 2px solid #ecd3ad;
+  border-radius: 26px;
+  box-shadow: 0 8px 18px rgba(90, 58, 34, .14);
+}
+/* aspas grandes decorativas no canto */
+.aspas {
+  position: absolute;
+  top: -4px;
+  right: 16px;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--azul);
+  opacity: .12;
+  pointer-events: none;
+}
+.estrelas { color: #f5a623; font-size: 1.15rem; letter-spacing: 3px; }
+.avaliacao p {
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--marrom);
+}
+
+/* rodapé do card: foto + nome */
+.cliente {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed #e2c79c;
+}
+.avatar {
+  position: relative;
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid var(--azul);
+  background: var(--pessego);
+}
+.avatar::before {              /* inicial do nome, aparece quando não tem foto */
+  content: attr(data-inicial);
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--azul);
+}
+.avatar img {                  /* a foto cobre a inicial */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cliente-info { display: flex; flex-direction: column; line-height: 1.25; }
+.cliente-info strong { font-size: .95rem; color: var(--marrom); }
+.cliente-info span {
+  align-self: flex-start;
+  margin-top: 3px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--pessego);
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--marrom-claro);
+}
+
+/* ===== BOTÃO FLUTUANTE DO WHATSAPP ===== */
+.zap-fixo {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 50;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--verde);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .25);
+  opacity: 0;
+  translate: 0 80px;           /* começa escondido embaixo */
+  pointer-events: none;
+  transition: opacity .4s, translate .5s cubic-bezier(.2, 1.4, .4, 1);
+}
+.zap-fixo.visivel {            /* o JS adiciona esta classe depois de rolar um pouco */
+  opacity: 1;
+  translate: 0 0;
+  pointer-events: auto;
+  animation: pulsar 2.6s 1s infinite;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+   Usamos as propriedades "translate", "rotate" e "scale" (separadas do
+   "transform") para as animações não brigarem com as rotações já existentes.
+   ========================================================= */
+
+@keyframes subir {
+  from { opacity: 0; translate: 0 24px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes cair-cookie {       /* o cookie do topo cai e quica */
+  0%   { opacity: 0; translate: 0 -90px; rotate: -25deg; }
+  70%  { opacity: 1; translate: 0 8px;   rotate: 4deg; }
+  100% { opacity: 1; translate: 0 0;     rotate: 0deg; }
+}
+@keyframes flutuar { 50% { translate: 0 -10px; } }
+@keyframes bob     { 50% { translate: 0 -9px; rotate: 10deg; } }
+@keyframes pulsar {
+  0%   { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 0 rgba(31, 174, 79, .55); }
+  70%  { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 16px rgba(31, 174, 79, 0); }
+  100% { box-shadow: 0 5px 0 var(--verde-escuro), 0 0 0 0 rgba(31, 174, 79, 0); }
+}
+@keyframes brilhar {
+  0%   { scale: .5; opacity: 0; }
+  60%  { scale: 1.15; opacity: 1; }
+  100% { scale: 1; opacity: 1; }
+}
+
+/* --- entrada do topo (acontece ao abrir a página) --- */
+.hero h1            { animation: subir .8s .1s both; }
+.hero p             { animation: subir .8s .3s both; }
+.hero .btn-whats    { animation: subir .8s .5s both, pulsar 2.4s 1.6s infinite; }
+.img-cookie-topo    { animation: cair-cookie 1s .3s cubic-bezier(.3, .8, .4, 1) both,
+                                 flutuar 5s 1.6s ease-in-out infinite; }
+.logo               { animation: subir .6s both; }
+
+/* --- gotas de chocolate flutuando, cada uma no seu ritmo --- */
+.gota               { animation: bob 6s ease-in-out infinite; }
+.gota:nth-of-type(2n)  { animation-duration: 7.5s; animation-delay: -2s; }
+.gota:nth-of-type(3n)  { animation-duration: 5s;   animation-delay: -1s; }
+.gota:nth-of-type(5n)  { animation-duration: 9s;   animation-delay: -4s; }
+
+/* --- aparecem ao rolar (o JS coloca as classes .reveal e .visivel) --- */
+.js .reveal {
+  opacity: 0;
+  translate: 0 28px;
+  transition: opacity .7s ease var(--d, 0s),
+              translate .7s cubic-bezier(.2, .8, .2, 1) var(--d, 0s),
+              scale .8s cubic-bezier(.2, 1.4, .4, 1) var(--d, 0s),
+              transform .25s, box-shadow .25s;
+}
+.js .card.reveal,
+.js .avaliacao.reveal { translate: 50px 0; }          /* entram vindos da direita */
+.js .fotos-torta.reveal { translate: 0 0; scale: .8; } /* a torta "cresce" */
+.js .reveal.visivel { opacity: 1; translate: 0 0; scale: 1; }
+.avaliacao.visivel .estrelas { animation: brilhar .8s .3s both; }
+
+/* --- cards reagem ao dedo ou ao mouse --- */
+.card, .avaliacao { transition: transform .25s, box-shadow .25s; }
+.card:hover, .card:active {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 14px 22px rgba(90, 58, 34, .2);
+}
+.card img { transition: transform .4s; }
+.card:hover img, .card:active img { transform: scale(1.08) rotate(6deg); }
+.btn-whats:active { transform: translateY(3px); }
+
+/* --- quem prefere menos movimento no celular não vê animações --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .js .reveal { opacity: 1; translate: none; scale: none; }
+}
+
+/* --- carrossel: os cards que saem da tela vão desfocando e esmaecendo ---
+   O JavaScript calcula --b (desfoque) e --o (opacidade) de cada card. */
+.carrossel > .card,
+.carrossel > .avaliacao {
+  filter: blur(var(--b, 0px)) opacity(var(--o, 1));
+}

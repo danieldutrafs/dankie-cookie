@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>document.documentElement.classList.add('js')</script>
+    <title>Dankie Cookie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=DM+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+
+    <!-- ========== TOPO ========== -->
+    <div class="topo">
+        <header class="barra">
+            <span class="logo">Dankie Cookie</span>
+        </header>
+
+        <section class="hero">
+            <!-- gotas de chocolate (decoração) -->
+            <span class="gota" style="--x:6%;--y:7%;--s:12px;--r:-20deg"></span>
+            <span class="gota" style="--x:70%;--y:5%;--s:10px;--r:30deg"></span>
+            <span class="gota branca" style="--x:88%;--y:12%;--s:16px;--r:15deg"></span>
+            <span class="gota" style="--x:93%;--y:58%;--s:13px;--r:-35deg"></span>
+            <span class="gota branca" style="--x:46%;--y:80%;--s:12px;--r:40deg"></span>
+            <span class="gota" style="--x:4%;--y:72%;--s:14px;--r:12deg"></span>
+            <h1>Feito com amor, <strong>recheado de verdade</strong></h1>
+            <p>Do clássico ao Kinder Bueno, tem um cookie pra cada vontade.</p>
+            <a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
+            <img class="img-cookie-topo" src="src/img/cookiet-removebg-preview.png" alt="Cookie recheado da Dankie">
+        </section>
+
+        <!-- nuvem com contorno marrom -->
+        <svg class="nuvem" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+            <path
+                d="M0 0 H400 V4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4 Z"
+                fill="#fff3e3" />
+            <path
+                d="M400 4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4"
+                fill="none" stroke="#5a3a22" stroke-width="2" vector-effect="non-scaling-stroke" />
+        </svg>
+    </div>
+
+    <main>
+
+        <!-- ========== SABORES (carrossel) ========== -->
+        <section class="sabores">
+            <span class="gota" style="--x:5%;--y:5%;--s:14px;--r:25deg"></span>
+            <span class="gota branca" style="--x:90%;--y:6%;--s:18px;--r:-18deg"></span>
+            <span class="gota" style="--x:92%;--y:84%;--s:12px;--r:40deg"></span>
+            <span class="gota branca" style="--x:6%;--y:88%;--s:16px;--r:-30deg"></span>
+            <h2>Encontre o seu sabor preferido</h2>
+            <p class="dica">Deslize para ver todos os sabores →</p>
+
+            <div class="carrossel">
+
+                <article class="card">
+                    <img src="src/img/kinder.png" alt="Cookie de Kinder Bueno">
+                    <h3>Kinder Bueno</h3>
+                    <p>Cookie recheado com Kinder Bueno.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/avela.png" alt="Cookie de creme de avelã">
+                    <h3>Creme de avelã</h3>
+                    <p>Cookie recheado com creme de avelã.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/oreo.png" alt="Cookie de Oreo">
+                    <h3>Oreo</h3>
+                    <p>Cookie recheado com Oreo.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/ourobranco.png" alt="Cookie de Ouro Branco" loading="lazy">
+                    <h3>Ouro Branco</h3>
+                    <p>Cookie recheado com Ouro Branco.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/stikadinho.png" alt="Cookie de Stikadinho" loading="lazy">
+                    <h3>Stikadinho</h3>
+                    <p>Cookie recheado com Stikadinho.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/tradicional.png" alt="Cookie tradicional" loading="lazy">
+                    <h3>Tradicional</h3>
+                    <p>Chocolate ao leite e gotas de chocolate.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+                <article class="card">
+                    <img src="src/img/chocolatebranco.png" alt="Cookie de chocolate branco" loading="lazy">
+                    <h3>Chocolate branco</h3>
+                    <p>Chocolate branco com confetes.</p>
+                    <span class="preco">R$ 15</span>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ========== AVALIAÇÕES ========== -->
+        <section class="avaliacoes" id="avaliacoes">
+            <span class="gota" style="--x:6%;--y:5%;--s:14px;--r:20deg"></span>
+            <span class="gota branca" style="--x:91%;--y:8%;--s:16px;--r:-25deg"></span>
+
+            <h2>Quem provou, aprovou</h2>
+            <p class="dica">O que os clientes dizem →</p>
+
+            <!-- ATENÇÃO: troque estes textos por elogios REAIS de clientes (peça autorização,
+                 principalmente para usar a foto). Não publique avaliação inventada. -->
+            <div class="carrossel">
+                <article class="avaliacao">
+                    <span class="aspas" aria-hidden="true">“</span>
+                    <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
+                    <p>Escreva aqui o elogio real de um cliente.</p>
+                    <footer class="cliente">
+                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
+                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
+                        <div class="avatar" data-inicial="N">
+                            <img src="src/img/clientes/cliente1.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
+                        </div>
+                        <div class="cliente-info">
+                            <strong>Nome do cliente</strong>
+                            <span>Sabor favorito: Oreo</span>
+                        </div>
+                    </footer>
+                </article>
+                <article class="avaliacao">
+                    <span class="aspas" aria-hidden="true">“</span>
+                    <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
+                    <p>Escreva aqui o elogio real de um cliente.</p>
+                    <footer class="cliente">
+                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
+                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
+                        <div class="avatar" data-inicial="N">
+                            <img src="src/img/clientes/cliente2.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
+                        </div>
+                        <div class="cliente-info">
+                            <strong>Nome do cliente</strong>
+                            <span>Sabor favorito: Oreo</span>
+                        </div>
+                    </footer>
+                </article>
+                <article class="avaliacao">
+                    <span class="aspas" aria-hidden="true">“</span>
+                    <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
+                    <p>Escreva aqui o elogio real de um cliente.</p>
+                    <footer class="cliente">
+                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
+                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
+                        <div class="avatar" data-inicial="N">
+                            <img src="src/img/clientes/cliente3.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
+                        </div>
+                        <div class="cliente-info">
+                            <strong>Nome do cliente</strong>
+                            <span>Sabor favorito: Oreo</span>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        </section>
+
+        <!-- ========== TORTA ========== -->
+        <section class="torta" id="torta">
+            <span class="gota" style="--x:6%;--y:4%;--s:14px;--r:-25deg"></span>
+            <span class="gota branca" style="--x:88%;--y:5%;--s:16px;--r:20deg"></span>
+            <span class="gota" style="--x:94%;--y:72%;--s:13px;--r:35deg"></span>
+            <span class="gota" style="--x:4%;--y:92%;--s:12px;--r:-10deg"></span>
+            <h2>Quer mais do que um cookie? Vai de torta!</h2>
+
+            <div class="card-torta">
+
+                <div class="fotos-torta">
+                    <img class="foto-inteira" src="src/img/torta.png" alt="Torta de cookie" loading="lazy">
+                </div>
+
+                <div class="info-torta">
+                    <h3>Torta de cookie</h3>
+                    <p>Massa de cookie em formato de torta, perfeita pra dividir ou pra matar a vontade.</p>
+
+                    <ul class="precos-torta">
+                        <li>
+                            <span>Inteira <small>sob encomenda</small></span>
+                            <strong>R$ 120</strong>
+                        </li>
+                        <li>
+                            <span>Fatia</span>
+                            <strong>R$ 18</strong>
+                        </li>
+                    </ul>
+
+                    <a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+    <a class="zap-fixo" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Pedir no WhatsApp</a>
+
+    <script src="src/js/script.js" defer></script>
+</body>
+
+</html>
