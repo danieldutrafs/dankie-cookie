@@ -29,23 +29,28 @@
             <span class="gota" style="--x:93%;--y:58%;--s:13px;--r:-35deg"></span>
             <span class="gota branca" style="--x:46%;--y:80%;--s:12px;--r:40deg"></span>
             <span class="gota" style="--x:4%;--y:72%;--s:14px;--r:12deg"></span>
+            
             <h1>Feito com amor, <strong>recheado de verdade</strong></h1>
             <p>Do clássico ao Kinder Bueno, tem um cookie pra cada vontade.</p>
-            <!-- UM botão só: ele "viaja" pela página (topo > canto da tela > torta). O JS troca texto e link. -->
-            <div class="slot slot-hero">
-                <a id="zap" class="btn-whats zap" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
-            </div>
+            
+            <!-- Cookie no lugar certo (abaixo do texto) -->
             <img class="img-cookie-topo" src="src/img/cookiet-removebg-preview.png" alt="Cookie recheado da Dankie">
         </section>
 
-        <!-- nuvem com contorno marrom -->
-        <svg class="nuvem" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Nuvem bem menor e com degradê marrom -->
+        <svg class="nuvem" viewBox="0 0 400 16" preserveAspectRatio="none" aria-hidden="true">
             <path
-                d="M0 0 H400 V4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4 Z"
-                fill="#fff3e3" />
+                d="M0 0 H400 V2 C396.4 8 358.6 10 355 3 C351.7 9 317.2 10 313.9 4 C309.7 10 265.9 11 261.7 6 C258.5 12 225.5 13 222.3 6 C218.3 14 176.6 14 172.6 6 C168.9 11 130.4 10 126.7 5 C123.6 11 90.7 10 87.6 4 C83.7 12 42.5 10 38.6 3 C35.5 11 3.1 10 0 2 Z"
+                fill="url(#gradNuvem)" />
             <path
-                d="M400 4 C396.4 20.2 358.6 25 355 8.8 C351.7 21.6 317.2 24.9 313.9 12.1 C309.7 25.1 265.9 27.9 261.7 14.9 C258.5 31.1 225.5 32.1 222.3 15.9 C218.3 35.9 176.6 35.8 172.6 15.8 C168.9 29.1 130.4 27.7 126.7 14.4 C123.6 28.7 90.7 26.5 87.6 12.2 C83.7 30.3 42.5 26.3 38.6 8.2 C35.5 29.3 3.1 25.1 0 4"
-                fill="none" stroke="#5a3a22" stroke-width="2" vector-effect="non-scaling-stroke" />
+                d="M400 2 C396.4 8 358.6 10 355 3 C351.7 9 317.2 10 313.9 4 C309.7 10 265.9 11 261.7 6 C258.5 12 225.5 13 222.3 6 C218.3 14 176.6 14 172.6 6 C168.9 11 130.4 10 126.7 5 C123.6 11 90.7 10 87.6 4 C83.7 12 42.5 10 38.6 3 C35.5 11 3.1 10 0 2"
+                fill="none" stroke="#3b1f12" stroke-width="1.5" vector-effect="non-scaling-stroke" />
+            <defs>
+                <linearGradient id="gradNuvem" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#5a3a22" />
+                    <stop offset="100%" stop-color="#3b1f12" />
+                </linearGradient>
+            </defs>
         </svg>
     </div>
 
@@ -61,57 +66,62 @@
             <p class="dica">Deslize para ver todos os sabores →</p>
 
             <div class="carrossel">
-
                 <article class="card">
                     <img src="src/img/kinder.png" alt="Cookie de Kinder Bueno">
                     <h3>Kinder Bueno</h3>
                     <p>Cookie recheado com Kinder Bueno.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/avela.png" alt="Cookie de creme de avelã">
                     <h3>Creme de avelã</h3>
                     <p>Cookie recheado com creme de avelã.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/oreo.png" alt="Cookie de Oreo">
                     <h3>Oreo</h3>
                     <p>Cookie recheado com Oreo.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/ourobranco.png" alt="Cookie de Ouro Branco" loading="lazy">
                     <h3>Ouro Branco</h3>
                     <p>Cookie recheado com Ouro Branco.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/stikadinho.png" alt="Cookie de Stikadinho" loading="lazy">
                     <h3>Stikadinho</h3>
                     <p>Cookie recheado com Stikadinho.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/tradicional.png" alt="Cookie tradicional" loading="lazy">
                     <h3>Tradicional</h3>
                     <p>Chocolate ao leite e gotas de chocolate.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
                 <article class="card">
                     <img src="src/img/chocolatebranco.png" alt="Cookie de chocolate branco" loading="lazy">
                     <h3>Chocolate branco</h3>
                     <p>Chocolate branco com confetes.</p>
                     <span class="preco">R$ 15</span>
                 </article>
-
             </div>
+        </section>
+
+        <!-- ========== DANIEL (QUEM FAZ) ========== -->
+        <section class="daniel">
+            <div class="daniel-foto">
+                <img src="src/img/daniel.jpg" alt="Daniel, fundador da Dankie Cookie" loading="lazy" onerror="this.src='src/img/cookiet-removebg-preview.png'">
+            </div>
+            <span class="selo">Por trás do forno</span>
+            <h2>Quem faz o seu cookie?</h2>
+            <div class="daniel-texto">
+                <p>Abrir a Dankie Cookie é a realização de um grande sonho: transformar a paixão por confeitaria artesanal em momentos doces para o seu dia. Cada fornada é preparada com ingredientes selecionados e muito carinho para levar até você o cookie perfeito.</p>
+            </div>
+            <span class="assinatura">Daniel</span>
         </section>
 
         <!-- ========== AVALIAÇÕES ========== -->
@@ -122,16 +132,12 @@
             <h2>Quem provou, aprovou</h2>
             <p class="dica">O que os clientes dizem →</p>
 
-            <!-- ATENÇÃO: troque estes textos por elogios REAIS de clientes (peça autorização,
-                 principalmente para usar a foto). Não publique avaliação inventada. -->
             <div class="carrossel">
                 <article class="avaliacao">
                     <span class="aspas" aria-hidden="true">“</span>
                     <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
                     <p>Escreva aqui o elogio real de um cliente.</p>
                     <footer class="cliente">
-                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
-                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
                         <div class="avatar" data-inicial="N">
                             <img src="src/img/clientes/cliente1.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
                         </div>
@@ -146,30 +152,12 @@
                     <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
                     <p>Escreva aqui o elogio real de um cliente.</p>
                     <footer class="cliente">
-                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
-                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
                         <div class="avatar" data-inicial="N">
                             <img src="src/img/clientes/cliente2.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
                         </div>
                         <div class="cliente-info">
                             <strong>Nome do cliente</strong>
-                            <span>Sabor favorito: Oreo</span>
-                        </div>
-                    </footer>
-                </article>
-                <article class="avaliacao">
-                    <span class="aspas" aria-hidden="true">“</span>
-                    <div class="estrelas" aria-label="5 estrelas">★★★★★</div>
-                    <p>Escreva aqui o elogio real de um cliente.</p>
-                    <footer class="cliente">
-                        <!-- FOTO DO CLIENTE: salve em src/img/clientes/ e troque o nome do arquivo.
-                             Sem foto (ou sem autorização), aparece só a inicial do nome. -->
-                        <div class="avatar" data-inicial="N">
-                            <img src="src/img/clientes/cliente3.jpg" alt="Foto do cliente" loading="lazy" onerror="this.remove()">
-                        </div>
-                        <div class="cliente-info">
-                            <strong>Nome do cliente</strong>
-                            <span>Sabor favorito: Oreo</span>
+                            <span>Sabor favorito: Kinder</span>
                         </div>
                     </footer>
                 </article>
@@ -185,7 +173,6 @@
             <h2>Quer mais do que um cookie? Vai de torta!</h2>
 
             <div class="card-torta">
-
                 <div class="fotos-torta">
                     <img class="foto-inteira" src="src/img/torta.png" alt="Torta de cookie" loading="lazy">
                 </div>
@@ -204,17 +191,38 @@
                             <strong>R$ 18</strong>
                         </li>
                     </ul>
-
-                    <!-- o botão do topo pousa aqui quando você chega na torta -->
-                    <div class="slot slot-torta">
-                        <noscript><a class="btn-whats" href="https://wa.me/55DDDNUMERO?text=Quero%20pedir%20torta%20de%20cookie">Quero torta</a></noscript>
-                    </div>
+                    <a class="btn-whats btn-torta" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20torta%20de%20cookie">Quero torta!</a>
                 </div>
+            </div>
+        </section>
 
+        <!-- ========== DÚVIDAS FREQUENTES (FAQ) ========== -->
+        <section class="faq">
+            <h2>Dúvidas frequentes</h2>
+            <div class="faq-lista">
+                <details class="faq-item">
+                    <summary>Quais são as formas de pagamento?</summary>
+                    <p>Aceitamos Pix, cartões de crédito e débito, facilitando a sua compra na hora do pedido.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Como faço para pedir?</summary>
+                    <p>É muito simples! Basta clicar no botão do WhatsApp na tela para conversar direto com a gente e montar o seu pedido.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Qual é o prazo de entrega ou retirada?</summary>
+                    <p>Trabalhamos com fornadas fresquinhas. Consulte pelo WhatsApp a disponibilidade para entrega imediata ou agendamento de encomendas.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Como devo guardar os cookies?</summary>
+                    <p>Eles se mantêm deliciosos por dias! Você pode guardá-los em um recipiente hermético ou dar aquela esquentadinha rápida no micro-ondas antes de comer.</p>
+                </details>
             </div>
         </section>
 
     </main>
+
+    <!-- BOTÃO FIXO DO WHATSAPP NO CANTO INFERIOR -->
+    <a id="zap" class="btn-whats zap no-canto" href="https://wa.me/55DDDNUMERO?text=Oi!%20Quero%20pedir%20cookies">Peça já o seu!</a>
 
     <script src="src/js/script.js" defer></script>
 </body>
